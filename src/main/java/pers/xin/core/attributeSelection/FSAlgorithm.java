@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * To extend this class must implement the select(Instance data) method & getption() method Variable data is the train
+ * To extend this class must implement the select(Instance data) method and getption() method Variable data is the train
  * data.
  * Created by xin on 2017/4/13.
  */
