@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * run with multiple classifier without repeat feature selection
+ * run with multiple classifier without selecting feature repeatedly.
  * Created by xin on 11/06/2018.
  */
 public class RepeatableExperiment {

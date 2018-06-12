@@ -3,6 +3,7 @@ package pers.xin.core.attributeSelection;
 import weka.classifiers.meta.AttributeSelectedClassifier;
 
 /**
+ * a meta classifier based on weka's AttributeSelectedClassifier
  * Created by xin on 10/06/2018.
  */
 public class WekaMetaClassifier extends AttributeSelectedClassifier implements FSMeasure{

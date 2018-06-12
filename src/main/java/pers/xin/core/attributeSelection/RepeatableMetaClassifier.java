@@ -6,6 +6,7 @@ import weka.core.WeightedInstancesHandler;
 import java.util.Random;
 
 /**
+ * a classifier that can use a attribute selection which has already selected attributes.
  * Created by xin on 11/06/2018.
  */
 public class RepeatableMetaClassifier extends MetaClassifier {

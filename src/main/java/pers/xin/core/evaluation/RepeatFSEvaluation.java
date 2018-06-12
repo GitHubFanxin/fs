@@ -13,6 +13,7 @@ import weka.core.Instances;
 import java.util.Random;
 
 /**
+ * this evaluation can use a selected AttributeSelection.
  * Created by xin on 10/06/2018.
  */
 public class RepeatFSEvaluation extends Evaluation {

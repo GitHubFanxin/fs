@@ -10,7 +10,8 @@ import java.io.Serializable;
 import java.util.stream.Collectors;
 
 /**
- * if algorithm can handle weighted data it should implement WeightedInstancesHandler
+ * a Attribute Selection can hold a FSAlgorithm and use it to select attributes.
+ * If algorithm can handle weighted data it should implement WeightedInstancesHandler.
  * Created by xin on 23/03/2018.
  */
 public class AttributeSelection implements Serializable {

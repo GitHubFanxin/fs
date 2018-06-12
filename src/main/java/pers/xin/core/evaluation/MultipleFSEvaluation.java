@@ -11,7 +11,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Filter Feature Selection use this.
+ * Filter Feature Selection use this. This evaluation can reuse the result of attribute selection on different base
+ * classifier.
  * Created by xin on 11/06/2018.
  */
 public class MultipleFSEvaluation {
