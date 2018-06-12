@@ -110,6 +110,8 @@ public class ClassicalEntropy implements Entropy{
     }
 
     public double entropy(int index){
-        return entropy_cache[index];
+        Set<Integer> i = new HashSet<>();
+        i.add(index);
+        return entropy(i);
     }
 }
