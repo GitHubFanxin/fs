@@ -97,9 +97,9 @@ public class IINM implements Entropy{
 
     /**
      * NH(R|S)
-     * @param indicesR
-     * @param indicesS
-     * @return
+     * @param indicesR attribute set R
+     * @param indicesS attribute set S
+     * @return conditional entropy
      */
     public double conditionalEntropy(Set<Integer> indicesR, Set<Integer> indicesS){
         int num = m_data.numInstances();
@@ -136,9 +136,9 @@ public class IINM implements Entropy{
 
     /**
      * NMI(R;S)
-     * @param indicesR
-     * @param indicesS
-     * @return
+     * @param indicesR attribute set R
+     * @param indicesS attribute set S
+     * @return NMI
      */
     public double mutualInformation(Set<Integer> indicesR, Set<Integer> indicesS){
         if(indicesR==null||indicesS==null||indicesR.isEmpty()||indicesS.isEmpty())

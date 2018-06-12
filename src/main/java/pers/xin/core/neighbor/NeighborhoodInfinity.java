@@ -28,9 +28,9 @@ public class NeighborhoodInfinity extends Neighborhood {
 
     /**
      * 两个对象是否相邻
-     * @param first
-     * @param second
-     * @return
+     * @param first the first instance
+     * @param second the second instance
+     * @return isNeighbor
      */
     public boolean isNeighbor(Instance first, Instance second){
         if(first.equals(second)||first==second) return true;

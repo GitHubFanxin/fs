@@ -13,11 +13,9 @@ import java.util.Vector;
 /**
  <!-- globalinfo-start -->
  * Dimensionality of training and test data is reduced by attribute selection before being passed on to a classifier.
- * <dimension/>
  <!-- globalinfo-end -->
  *
  <!-- options-start -->
- * Valid options are: <dimension/>
  *
  <!-- options-end -->
  */
@@ -87,7 +85,7 @@ public class MetaClassifier
     /**
      * write by xin
      * set attributeSelection
-     * @param m_AttributeSelection
+     * @param m_AttributeSelection attributeSelection want to use
      */
     public void setAttributeSelection(AttributeSelection m_AttributeSelection) {
         this.m_AttributeSelection = m_AttributeSelection;

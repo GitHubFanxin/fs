@@ -92,8 +92,8 @@ public class RepeatableExperiment {
     }
 
     /**
-     * output result as table (data,classifier)->pct
-     * @param file
+     * output result as table (data,classifier)-pct
+     * @param file file
      */
     public void oneDataMultipleClassifierExperiment(File file, int outputMode){
         try {

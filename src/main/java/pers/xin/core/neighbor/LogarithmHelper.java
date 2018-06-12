@@ -22,6 +22,8 @@ public class LogarithmHelper {
 
     /**
      * Help method for computing entropy.
+     * @param num number
+     * @return log(num)
      */
     public static double lnFunc(double num){
 

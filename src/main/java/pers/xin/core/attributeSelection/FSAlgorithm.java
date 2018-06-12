@@ -48,6 +48,7 @@ public abstract class FSAlgorithm implements Serializable, OptionHandler{
 
     /**
      * Init some variables.
+     * @param data train data.
      */
     protected void init(Instances data){
         this.data = data;
@@ -63,10 +64,11 @@ public abstract class FSAlgorithm implements Serializable, OptionHandler{
         });
     }
 
-
     /**
      * Select attribute and save the attribute indices in m_SelectedAttributes include class index.
-     * @param data The training data.
+     * @param data
+     * @return indices of reduction include class index
+     * @throws Exception
      */
     public int[] selectAttributes(Instances data) throws Exception{
         init(data);

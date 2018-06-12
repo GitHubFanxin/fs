@@ -69,11 +69,14 @@ public abstract class Neighborhood extends NormalizableDistance {
 
     /**
      * 由于原API中不能计算class类的距离在此重写删除该限制
-     * @param first
-     * @param second
-     * @param cutOffValue
-     * @param stats
-     * @return
+     * @param first the first instance
+     * @param second the second instance
+     * @param cutOffValue If the distance being calculated becomes larger than
+     *          cutOffValue then the rest of the calculation is discarded.
+     * @param stats the performance stats object
+     * @return the distance between the two given instances or
+     *         Double.POSITIVE_INFINITY if the distance being calculated becomes
+     *         larger than cutOffValue.
      */
     @Override
     public double distance(Instance first, Instance second, double cutOffValue,
@@ -137,6 +140,10 @@ public abstract class Neighborhood extends NormalizableDistance {
 
     /**
      * 如果两个值都miss认为它们相似，即认为其没有分辨力
+     * @param index the attribute index
+     * @param val1 the first value
+     * @param val2 the second value
+     * @return the difference
      */
     @Override
     protected double difference(int index, double val1, double val2) {
@@ -146,10 +153,10 @@ public abstract class Neighborhood extends NormalizableDistance {
 
     /**
      * 两个对象指定的某一属性上是否相邻
-     * @param index
-     * @param first
-     * @param second
-     * @return
+     * @param index the attribute index
+     * @param first the first instance
+     * @param second the second instance
+     * @return isNeighbor
      */
     public boolean isNeighborOnAttr(int index, Instance first, Instance second){
         if(first.equals(second)||first==second) return true;
@@ -160,9 +167,9 @@ public abstract class Neighborhood extends NormalizableDistance {
 
     /**
      * 两个对象是否相邻
-     * @param first
-     * @param second
-     * @return
+     * @param first the first instance
+     * @param second the second instance
+     * @return isNeighbor
      */
     public abstract boolean isNeighbor(Instance first, Instance second);
 }
