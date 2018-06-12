@@ -76,7 +76,7 @@ public class RepeatableExperiment {
             classifiersHeader = classifiersHeader + "," + classifier.getClass().getSimpleName();
         }
         String fsAlgorithmName = m_fsAlgorithm.getClass().getSimpleName();
-        Output.setFolder("./output/"+fsAlgorithmName+"/");
+
         if(fileMode==DATA_CLASSIFIERS||fileMode==DATA_BOTH){
             PrintWriter pw = Output.createAppendPrint(optionString);
             pw.println("Data Set"+classifiersHeader);
@@ -261,6 +261,7 @@ public class RepeatableExperiment {
         e.setDataFilePath("./dataset");
         TEST mrmi = new TEST();
         mrmi.setOptions(Utils.splitOptions("-D 0.2"));
+        Output.setFolder("./output/"+mrmi.getClass().getSimpleName()+"/");
         e.setFSAlgorithm(mrmi);
         J48 j48 = new J48();
         IBk iBk = new IBk();
