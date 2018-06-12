@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
  */
 public class RepeatableExperiment {
 
-
     public static final int DATA_CLASSIFIER = 1;
     public static final int DATA_CLASSIFIERS = 2;
     public static final int DATA_BOTH = 3;
@@ -53,6 +52,10 @@ public class RepeatableExperiment {
     public RepeatableExperiment(int numFold, long seed) {
         this.numFold = numFold;
         this.seed = seed;
+    }
+
+    public void setParallel(boolean parallel) {
+        this.parallel = parallel;
     }
 
     public void setDataFilePath(String dataFilePath) {
@@ -133,6 +136,15 @@ public class RepeatableExperiment {
                     dataClassifier(multipleFSEvaluation,optionString);
                     break;
             }
+            //output features
+            PrintWriter tpw = Output.createAppendPrint(optionString+"/time/"+data.relationName());
+            for (double time : multipleFSEvaluation.timeMeasures()) {
+                tpw.println(time);
+            }
+            tpw.println(multipleFSEvaluation.timeMeasure());
+            tpw.close();
+
+
             //output features
             PrintWriter fpw = Output.createAppendPrint(optionString+"/reductions/"+data.relationName());
             for (String reduction : reductions) {
@@ -255,6 +267,6 @@ public class RepeatableExperiment {
         iBk.setKNN(3);
         Classifier[] cs = new Classifier[]{j48, iBk};
         e.setClassifiers(cs);
-        e.run(RepeatableExperiment.COUNT_BOTH);
+        e.run(RepeatableExperiment.DATA_CLASSIFIERS);
     }
 }

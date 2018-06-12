@@ -10,6 +10,7 @@ import weka.classifiers.evaluation.output.prediction.AbstractOutput;
 import weka.core.Instances;
 import weka.core.WeightedInstancesHandler;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -116,5 +117,13 @@ public class FSEvaluation extends Evaluation {
             m_reduction = ((FSMeasure) classifier).getReductionString();
         }
         return result;
+    }
+
+    public double[] timeMeasures(){
+        return m_crossValidateTime;
+    }
+
+    public double timeMeasure(){
+        return Arrays.stream(m_crossValidateTime).reduce(Double::sum).orElse(0)/m_crossValidateTime.length;
     }
 }

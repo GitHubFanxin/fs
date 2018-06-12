@@ -7,6 +7,7 @@ import weka.classifiers.evaluation.output.prediction.AbstractOutput;
 import weka.core.Instances;
 import weka.core.WeightedInstancesHandler;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -35,9 +36,6 @@ public class MultipleFSEvaluation {
     double m_time;
 
     int minFoldASLength;
-
-
-
 
     public MultipleFSEvaluation(Instances data){
         m_Header = new Instances(data, 0);
@@ -189,5 +187,13 @@ public class MultipleFSEvaluation {
         evaluation.setAttributeSelections(countAttributeSelection);
         evaluation.crossValidateModel(baseClassifier,data,numFolds,random);
         return evaluation;
+    }
+
+    public double[] timeMeasures(){
+        return m_crossValidateTime;
+    }
+
+    public double timeMeasure(){
+        return Arrays.stream(m_crossValidateTime).reduce(Double::sum).orElse(0)/m_crossValidateTime.length;
     }
 }

@@ -155,7 +155,6 @@ public class AttributeSelection implements Serializable {
     }
 
     public static AttributeSelection makeCopy(AttributeSelection model) throws Exception {
-
         return (AttributeSelection) new SerializedObject(model).getObject();
     }
 
