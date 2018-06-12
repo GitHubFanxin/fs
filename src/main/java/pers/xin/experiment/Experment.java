@@ -138,7 +138,7 @@ public class Experment {
 
     /**
      * output result as table (data,classifier)-pct
-     * @param file
+     * @param file data file
      */
     public void oneDataMultipleClassifierExperiment(File file){
         try {
@@ -175,7 +175,7 @@ public class Experment {
 
     /**
      * output result as table (data,classifier)-pct
-     * @param file
+     * @param file data file
      */
     public void oneDataRepeatableExperiment(File file){
         try {

@@ -40,9 +40,12 @@ public abstract class FSAlgorithm implements Serializable, OptionHandler{
      */
     protected List<Integer> l_SelectedAttributes;
 
+
     /**
+     *
      * Implement algorithm here.
      * @return List contains attribute indices.
+     * @throws Exception
      */
     protected abstract List<Integer> select(Instances data) throws Exception;
 
@@ -66,7 +69,7 @@ public abstract class FSAlgorithm implements Serializable, OptionHandler{
 
     /**
      * Select attribute and save the attribute indices in m_SelectedAttributes include class index.
-     * @param data
+     * @param data train data
      * @return indices of reduction include class index
      * @throws Exception
      */

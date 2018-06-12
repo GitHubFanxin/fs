@@ -57,7 +57,7 @@ public class AttributeSelection implements Serializable {
      * Return the number of attributes selected from the most recent run of
      * attribute selection
      * @return number of attributes selected
-     * @throws Exception
+     * @throws Exception if attribute selection has not been performed yet
      */
     public int numberAttributesSelected() throws Exception {
         int[] att = selectedAttributes();
