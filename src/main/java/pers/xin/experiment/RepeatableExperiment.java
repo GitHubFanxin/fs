@@ -259,10 +259,10 @@ public class RepeatableExperiment {
     public static void main(String[] args) throws Exception {
         RepeatableExperiment e = new RepeatableExperiment(10,1);
         e.setDataFilePath("./dataset");
-        TEST mrmi = new TEST();
-        mrmi.setOptions(Utils.splitOptions("-D 0.2"));
-        Output.setFolder("./output/"+mrmi.getClass().getSimpleName()+"/");
-        e.setFSAlgorithm(mrmi);
+        TEST test = new TEST();
+        test.setOptions(Utils.splitOptions("-D 0.2"));
+        Output.setFolder("./output/"+test.getClass().getSimpleName()+"/");
+        e.setFSAlgorithm(test);
         J48 j48 = new J48();
         IBk iBk = new IBk();
         iBk.setKNN(3);

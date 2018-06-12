@@ -15,7 +15,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * max Relevance max New Information
  * 矩阵统计频数
  * Created by xin on 06/03/2018.
  */
