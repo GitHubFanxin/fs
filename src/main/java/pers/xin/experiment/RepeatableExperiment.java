@@ -71,7 +71,7 @@ public class RepeatableExperiment {
     }
 
     public void run(int fileMode) throws Exception {
-        optionString = Utils.joinOptions(m_fsAlgorithm.getOptions());
+        optionString = m_fsAlgorithm.getSetting();
         for (Classifier classifier : classifiers) {
             classifiersHeader = classifiersHeader + "," + classifier.getClass().getSimpleName();
         }

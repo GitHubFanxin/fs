@@ -1,12 +1,13 @@
 package pers.xin.core.attributeSelection;
 
-import weka.classifiers.Classifier;
 import weka.core.Instances;
+import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.SerializedObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -130,4 +131,19 @@ public abstract class FSAlgorithm implements Serializable, OptionHandler{
         return (FSAlgorithm) new SerializedObject(model).getObject();
     }
 
+    @Override
+    public Enumeration<Option> listOptions() {
+        return null;
+    }
+
+    /**
+     * this String is the name of result subfolder
+     * @return settings of the algorithm
+     */
+    public abstract String getSetting();
+
+    @Override
+    public String[] getOptions() {
+        return new String[0];
+    }
 }

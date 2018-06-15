@@ -182,6 +182,11 @@ public class TEST extends FSAlgorithm implements OptionHandler{
     }
 
     @Override
+    public String getSetting() {
+        return "D"+delta;
+    }
+
+    @Override
     protected void finalize() throws Throwable {
         super.finalize();
         System.gc();
@@ -189,11 +194,6 @@ public class TEST extends FSAlgorithm implements OptionHandler{
 
     double sigmoid(double x){
         return 1.0/(1+Math.exp(-x));
-    }
-
-    @Override
-    public Enumeration<Option> listOptions() {
-        return null;
     }
 
     @Override
@@ -213,4 +213,6 @@ public class TEST extends FSAlgorithm implements OptionHandler{
         options.add(""+delta);
         return options.toArray(new String[0]);
     }
+
+
 }
