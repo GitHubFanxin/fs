@@ -62,7 +62,7 @@ public class OriginExperiment {
         for (Classifier classifier : classifiers) {
             classifiersHeader = classifiersHeader + "," + classifier.getClass().getSimpleName();
         }
-        Output.setFolder("./output/"+fsAlgorithmName+"/");
+        Output.setFolder("./output/"+fsAlgorithmName+"/0/");
         File folder = new File(dataFilePath);
         File[] files = folder.listFiles(f -> f.getName().contains(".arff"));
         List<File> fileArray = Arrays.stream(files).collect(Collectors.toList());

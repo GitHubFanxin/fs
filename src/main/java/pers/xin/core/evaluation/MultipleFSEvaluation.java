@@ -11,32 +11,32 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Filter Feature Selection use this. This evaluation can reuse the result of attribute selection on different base
- * classifier.
+ * Filter Feature Selection use this Evaluation. This evaluation can reuse the result of attribute selection on
+ * different base classifier.
  * Created by xin on 11/06/2018.
  */
 public class MultipleFSEvaluation {
 
-    private Instances m_data;
+    protected Instances m_data;
 
-    private Instances m_Header;
+    protected Instances m_Header;
 
     /** The number of folds for a cross-validation. */
     protected int m_NumFolds;
 
-    private long m_seed;
+    protected long m_seed;
 
-    AttributeSelection[] m_attributeSelections;
+    protected AttributeSelection[] m_attributeSelections;
 
-    String[] m_crossValidateReductions;
+    protected String[] m_crossValidateReductions;
 
-    String m_reduction;
+    protected String m_reduction;
 
-    double[] m_crossValidateTime;
+    protected double[] m_crossValidateTime;
 
-    double m_time;
+    protected double m_time;
 
-    int minFoldASLength;
+    protected int minFoldASLength;
 
     public MultipleFSEvaluation(Instances data){
         m_Header = new Instances(data, 0);

@@ -33,21 +33,21 @@ public class RepeatableExperiment {
 //    public static final int PARAM_CLASSIFIER = 6;
 //    public static final int PARAM_CLASSIFIERS = 7;
 
-    private int numFold = 10;
+    protected int numFold = 10;
 
-    private long seed = 1;
+    protected long seed = 1;
 
-    private String dataFilePath;
+    protected String dataFilePath;
 
-    private FSAlgorithm m_fsAlgorithm;
+    protected FSAlgorithm m_fsAlgorithm;
 
-    private boolean parallel = true;
+    protected boolean parallel = true;
 
-    private Classifier[] classifiers;
+    protected Classifier[] classifiers;
 
-    private String optionString;
+    protected String optionString;
 
-    private String classifiersHeader = "";
+    protected String classifiersHeader = "";
 
     public RepeatableExperiment(int numFold, long seed) {
         this.numFold = numFold;
@@ -160,7 +160,7 @@ public class RepeatableExperiment {
         return ""+evaluation.pctCorrect();
     }
 
-    private void dataClassifiers(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
+    protected void dataClassifiers(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
         //output (data,classifier)->pct
         PrintWriter pw = Output.createAppendPrint(paramString);
         StringBuffer pcts = new StringBuffer();
@@ -174,7 +174,7 @@ public class RepeatableExperiment {
         pw.close();
     }
 
-    private void dataClassifier(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
+    protected void dataClassifier(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
         for (Classifier classifier : classifiers) {
             Classifier c = AbstractClassifier.makeCopy(classifier);
             Evaluation evaluation = multipleFSEvaluation.nextClassifier(c);
@@ -184,7 +184,7 @@ public class RepeatableExperiment {
         }
     }
 
-    private void dataBoth(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
+    protected void dataBoth(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
         //output (data,classifier)->pct
         PrintWriter pw = Output.createAppendPrint(paramString);
         StringBuffer pcts = new StringBuffer();
@@ -203,7 +203,7 @@ public class RepeatableExperiment {
     }
 
 
-    private void countClassifier(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
+    protected void countClassifier(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
         int maxLength = multipleFSEvaluation.getMinFoldASLength();
         for (int i = 1; i < maxLength; i++) {
             for (Classifier classifier : classifiers) {
@@ -217,7 +217,7 @@ public class RepeatableExperiment {
         }
     }
 
-    private void countClassifiers(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
+    protected void countClassifiers(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
         int maxLength = multipleFSEvaluation.getMinFoldASLength();
         PrintWriter pw = Output.createAppendPrint(paramString+"/"+multipleFSEvaluation.getHeader().relationName());
         pw.println("Data Set"+classifiersHeader);
@@ -234,7 +234,7 @@ public class RepeatableExperiment {
         pw.close();
     }
 
-    private void countBoth(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
+    protected void countBoth(MultipleFSEvaluation multipleFSEvaluation,String paramString) throws Exception {
         int maxLength = multipleFSEvaluation.getMinFoldASLength();
         PrintWriter pw = Output.createAppendPrint(paramString+"/"+multipleFSEvaluation.getHeader().relationName());
         pw.println("Data Set"+classifiersHeader);
