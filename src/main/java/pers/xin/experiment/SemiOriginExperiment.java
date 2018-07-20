@@ -1,6 +1,7 @@
 package pers.xin.experiment;
 
 import pers.xin.core.evaluation.FSEvaluation;
+import pers.xin.core.evaluation.SemiFSEvaluation;
 import pers.xin.utils.Output;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
@@ -21,57 +22,12 @@ import java.util.stream.Collectors;
 /**
  * Created by xin on 12/06/2018.
  */
-public class OriginExperiment {
+public class SemiOriginExperiment extends OriginExperiment{
+    protected double m_labelRatio;
 
-    protected int numFold = 10;
-
-    protected long seed = 1;
-
-    protected String dataFilePath;
-
-    protected boolean parallel = true;
-
-    protected Classifier[] classifiers;
-
-    protected String classifiersHeader = "";
-
-    String fsAlgorithmName = "Origin";
-
-    public OriginExperiment(int numFold, long seed) {
-        this.numFold = numFold;
-        this.seed = seed;
-    }
-
-    public void setFsAlgorithmName(String fsAlgorithmName) {
-        this.fsAlgorithmName = fsAlgorithmName;
-    }
-
-    public void setParallel(boolean parallel) {
-        this.parallel = parallel;
-    }
-
-    public void setDataFilePath(String dataFilePath) {
-        this.dataFilePath = dataFilePath;
-    }
-
-    public void setClassifiers(Classifier[] classifiers) {
-        this.classifiers = classifiers;
-    }
-
-    public void run() throws Exception {
-        for (Classifier classifier : classifiers) {
-            classifiersHeader = classifiersHeader + "," + classifier.getClass().getSimpleName();
-        }
-        Output.setFolder("./output/"+fsAlgorithmName+"/0/");
-        File folder = new File(dataFilePath);
-        File[] files = folder.listFiles(f -> f.getName().contains(".arff"));
-        List<File> fileArray = Arrays.stream(files).collect(Collectors.toList());
-        if(parallel){
-            fileArray.parallelStream().forEach(file -> oneDataMultipleClassifierExperiment(file));
-        }else {
-            fileArray.stream().forEach(file -> oneDataMultipleClassifierExperiment(file));
-        }
-
+    public SemiOriginExperiment(int numFold, long seed, double labelRatio) {
+        super(numFold, seed);
+        this.m_labelRatio = labelRatio;
     }
 
     /**
@@ -86,7 +42,7 @@ public class OriginExperiment {
             data.setClassIndex(data.numAttributes()-1);
 
             for (Classifier classifier : classifiers) {
-                Evaluation evaluation = new FSEvaluation(data);
+                Evaluation evaluation = new SemiFSEvaluation(data,m_labelRatio);
                 Classifier c = AbstractClassifier.makeCopy(classifier);
                 evaluation.crossValidateModel(c,data,numFold,new Random(seed));
                 PrintWriter pw = Output.createAppendPrint(classifier.getClass().getSimpleName());
@@ -104,7 +60,7 @@ public class OriginExperiment {
     }
 
     public static void main(String[] args) throws Exception {
-        OriginExperiment e = new OriginExperiment(10,1);
+        SemiOriginExperiment e = new SemiOriginExperiment(10,1,0.2);
         e.setDataFilePath("./dataset");
         J48 j48 = new J48();
         IBk iBk = new IBk();
