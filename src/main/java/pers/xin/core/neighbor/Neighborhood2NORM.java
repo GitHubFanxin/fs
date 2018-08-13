@@ -15,13 +15,13 @@ public class Neighborhood2NORM extends Neighborhood{
     public Neighborhood2NORM(Instances data, double delta, Set<Integer> indices) {
         super(data, delta, indices);
         delta2 = delta *delta;
-        cutOff = delta * numActiveIndices;
+        cutOff = delta2* numActiveIndices;
     }
 
     public Neighborhood2NORM(Instances data, double delta) {
         super(data, delta);
         delta2 = delta *delta;
-        cutOff = delta * numActiveIndices;
+        cutOff = delta2* numActiveIndices;
     }
 
     @Override

@@ -12,6 +12,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
+ * Evaluate FSAlgorithm only one time. First, split data set into labeled part and unlabeled part according to the gaven
+ * label ratio. Then automatically generate train sets and test sets for folds cross validate from the labeled part.
  * Created by xin on 10/06/2018.
  */
 public class SemiFSEvaluation extends Evaluation {

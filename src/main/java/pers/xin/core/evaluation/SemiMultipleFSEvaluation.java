@@ -11,14 +11,16 @@ import java.util.Arrays;
 import java.util.Random;
 
 /**
- * Filter Feature Selection use this Evaluation. This evaluation can reuse the result of attribute selection on
+ * Filter Feature Selection use this Evaluation. This evaluation can reuse the result of attribute selection on.First,
+ * split data set into labeled part and unlabeled part according to the gaven
+ * label ratio. Then automatically generate train sets and test sets for folds cross validate from the labeled part.
  * different base classifier.
  * Created by xin on 11/06/2018.
  */
-public class SemiMultipleFSEvaluation extends MultipleFSEvaluation{
+public class SemiMultipleFSEvaluation extends MultipleFSEvaluation {
     private double m_labeledRatio = 1;
 
-    public SemiMultipleFSEvaluation(Instances data, double labeledRatio){
+    public SemiMultipleFSEvaluation(Instances data, double labeledRatio) {
         super(data);
         this.m_labeledRatio = labeledRatio;
     }
@@ -42,7 +44,7 @@ public class SemiMultipleFSEvaluation extends MultipleFSEvaluation{
         Instances l_data = data.stringFreeStructure();
         Instances u_data = data.stringFreeStructure();
         for (int i = 0; i < numInstances; i++) {
-            if(i<numInstances*m_labeledRatio) l_data.add(data.get(i));
+            if (i < numInstances * m_labeledRatio) l_data.add(data.get(i));
             else u_data.add(data.get(i));
         }
         for (int i = 0; i < u_data.size(); i++) {
@@ -72,7 +74,7 @@ public class SemiMultipleFSEvaluation extends MultipleFSEvaluation{
             train.addAll(u_data);
 
             AttributeSelection copiedAttributeSelection = AttributeSelection.makeCopy(attributeSelection);
-            m_attributeSelections[i] = buildAttributeSelection(copiedAttributeSelection,train);
+            m_attributeSelections[i] = buildAttributeSelection(copiedAttributeSelection, train);
             m_reduction = m_attributeSelections[i].toResultsString();
             m_crossValidateTime[i] = m_time;
             m_crossValidateReductions[i] = m_reduction;
@@ -83,9 +85,9 @@ public class SemiMultipleFSEvaluation extends MultipleFSEvaluation{
 
     public Evaluation crossValidateModel(Classifier baseClassifier, Instances
             data, int numFolds, Random random) throws Exception {
-        SemiRepeatFSEvaluation evaluation = new SemiRepeatFSEvaluation(data,m_labeledRatio);
+        SemiRepeatFSEvaluation evaluation = new SemiRepeatFSEvaluation(data, m_labeledRatio);
         evaluation.setAttributeSelections(this.m_attributeSelections);
-        evaluation.crossValidateModel(baseClassifier,data,numFolds,random);
+        evaluation.crossValidateModel(baseClassifier, data, numFolds, random);
         return evaluation;
     }
 }

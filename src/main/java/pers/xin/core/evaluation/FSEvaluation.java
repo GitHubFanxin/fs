@@ -1,6 +1,5 @@
 package pers.xin.core.evaluation;
 
-import pers.xin.core.attributeSelection.AttributeSelection;
 import pers.xin.core.attributeSelection.FSMeasure;
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
@@ -8,12 +7,12 @@ import weka.classifiers.CostMatrix;
 import weka.classifiers.evaluation.Evaluation;
 import weka.classifiers.evaluation.output.prediction.AbstractOutput;
 import weka.core.Instances;
-import weka.core.WeightedInstancesHandler;
 
 import java.util.Arrays;
 import java.util.Random;
 
 /**
+ * Evaluate FSAlgorithm only one time.
  * Created by xin on 10/06/2018.
  */
 public class FSEvaluation extends Evaluation {

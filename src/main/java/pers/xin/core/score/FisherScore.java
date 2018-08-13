@@ -9,11 +9,11 @@ import java.io.File;
 import java.io.FileReader;
 
 /**
+ * Data Classification: Algorithm and Application. p44
  * Created by xin on 19/07/2018.
  */
 public class FisherScore implements Scoring {
     protected double[] scores;
-
 
     private double[] m_build(Instances data) {
         int numAttr = data.numAttributes() - 1;

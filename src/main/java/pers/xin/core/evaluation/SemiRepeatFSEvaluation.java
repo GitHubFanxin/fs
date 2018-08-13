@@ -12,7 +12,8 @@ import weka.core.Instances;
 import java.util.Random;
 
 /**
- * this evaluation can use a selected AttributeSelection.
+ * A help class, this evaluation can use a selected AttributeSelection. By reuse a AttributeSelection that already
+ * built can reduce the evaluation time.
  * Created by xin on 10/06/2018.
  */
 public class SemiRepeatFSEvaluation extends Evaluation {

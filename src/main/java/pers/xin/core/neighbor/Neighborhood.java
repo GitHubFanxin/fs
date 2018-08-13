@@ -18,33 +18,35 @@ public abstract class Neighborhood extends NormalizableDistance {
 
     protected double delta;
 
-    protected int numActiveIndices=0;
+    protected int numActiveIndices = 0;
 
     /**
      * 邻域计算帮助类
-     * @param data 用于数据归一化的数据
-     * @param delta 邻域大小
+     *
+     * @param data    用于数据归一化的数据
+     * @param delta   邻域大小
      * @param indices 参与计算的属性集合
      */
     public Neighborhood(Instances data, double delta, Set<Integer> indices) {
         super(data);
         this.delta = delta;
-        setAttributeIndices(indices.stream().map(x->(x+1)+"").collect(Collectors.joining(",")));
+        setAttributeIndices(indices.stream().map(x -> (x + 1) + "").collect(Collectors.joining(",")));
         numActiveIndices = indices.size();
     }
 
     /**
      * 邻域计算帮助类，默认所有条件属性参与计算
-     * @param data 用于数据归一化的数据
+     *
+     * @param data  用于数据归一化的数据
      * @param delta 邻域大小
      */
     public Neighborhood(Instances data, double delta) {
         super(data);
         this.delta = delta;
-        numActiveIndices = m_Data.numAttributes()-1;
+        numActiveIndices = m_Data.numAttributes() - 1;
         Set<Integer> indices = new HashSet<>();
-        for (int i = 0; i < data.numAttributes()-1; i++) indices.add(i);
-        setAttributeIndices(indices.stream().map(x->(x+1)+"").collect(Collectors.joining(",")));
+        for (int i = 0; i < data.numAttributes() - 1; i++) indices.add(i);
+        setAttributeIndices(indices.stream().map(x -> (x + 1) + "").collect(Collectors.joining(",")));
         numActiveIndices = indices.size();
     }
 
@@ -60,23 +62,25 @@ public abstract class Neighborhood extends NormalizableDistance {
 
     /**
      * 参与邻域计算的属性
+     *
      * @param indices 属性集合
      */
-    public void setIndices(Set<Integer> indices){
-        setAttributeIndices(indices.stream().map(x->(x+1)+"").collect(Collectors.joining(",")));
+    public void setIndices(Set<Integer> indices) {
+        setAttributeIndices(indices.stream().map(x -> (x + 1) + "").collect(Collectors.joining(",")));
         numActiveIndices = indices.size();
     }
 
     /**
      * 由于原API中不能计算class类的距离在此重写删除该限制
-     * @param first the first instance
-     * @param second the second instance
+     *
+     * @param first       the first instance
+     * @param second      the second instance
      * @param cutOffValue If the distance being calculated becomes larger than
-     *          cutOffValue then the rest of the calculation is discarded.
-     * @param stats the performance stats object
+     *                    cutOffValue then the rest of the calculation is discarded.
+     * @param stats       the performance stats object
      * @return the distance between the two given instances or
-     *         Double.POSITIVE_INFINITY if the distance being calculated becomes
-     *         larger than cutOffValue.
+     * Double.POSITIVE_INFINITY if the distance being calculated becomes
+     * larger than cutOffValue.
      */
     @Override
     public double distance(Instance first, Instance second, double cutOffValue,
@@ -89,7 +93,7 @@ public abstract class Neighborhood extends NormalizableDistance {
 
         validate();
 
-        for (int p1 = 0, p2 = 0; p1 < firstNumValues || p2 < secondNumValues;) {
+        for (int p1 = 0, p2 = 0; p1 < firstNumValues || p2 < secondNumValues; ) {
             if (p1 >= firstNumValues) {
                 firstI = numAttributes;
             } else {
@@ -140,34 +144,38 @@ public abstract class Neighborhood extends NormalizableDistance {
 
     /**
      * 如果两个值都miss认为它们相似，即认为其没有分辨力
+     *
      * @param index the attribute index
-     * @param val1 the first value
-     * @param val2 the second value
+     * @param val1  the first value
+     * @param val2  the second value
      * @return the difference
      */
     @Override
     protected double difference(int index, double val1, double val2) {
         if (Utils.isMissingValue(val1) || Utils.isMissingValue(val2)) return 0;
+        validate();
         return super.difference(index, val1, val2);
     }
 
     /**
      * 两个对象指定的某一属性上是否相邻
-     * @param index the attribute index
-     * @param first the first instance
+     *
+     * @param index  the attribute index
+     * @param first  the first instance
      * @param second the second instance
      * @return isNeighbor
      */
-    public boolean isNeighborOnAttr(int index, Instance first, Instance second){
-        if(first.equals(second)||first==second) return true;
+    public boolean isNeighborOnAttr(int index, Instance first, Instance second) {
+        if (first.equals(second) || first == second) return true;
 //        if(first.isMissing(index)||second.isMissing(index)) return true;
-        double dis =Math.abs(difference(index,first.value(index),second.value(index)));
-        return dis<=delta;
+        double dis = Math.abs(difference(index, first.value(index), second.value(index)));
+        return dis <= delta;
     }
 
     /**
      * 两个对象是否相邻
-     * @param first the first instance
+     *
+     * @param first  the first instance
      * @param second the second instance
      * @return isNeighbor
      */

@@ -5,12 +5,19 @@ import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import it.unimi.dsi.fastutil.ints.IntSet;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import pers.xin.core.attributeSelection.AttributeSelection;
 import pers.xin.core.attributeSelection.FSAlgorithm;
+import pers.xin.core.attributeSelection.MetaClassifier;
+import pers.xin.core.attributeSelection.OptimizableFS;
 import pers.xin.core.entropy.IINM;
+import pers.xin.core.evaluation.FSEvaluation;
 import pers.xin.core.neighbor.Neighborhood;
 import pers.xin.core.neighbor.NeighborhoodInfinity;
+import weka.classifiers.trees.J48;
 import weka.core.*;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,7 +25,7 @@ import java.util.stream.Collectors;
  * 矩阵统计频数
  * Created by xin on 06/03/2018.
  */
-public class TEST extends FSAlgorithm implements OptionHandler{
+public class TEST extends FSAlgorithm implements OptimizableFS {
     private int count=10;
 
     private double delta = 0.125;
@@ -149,7 +156,7 @@ public class TEST extends FSAlgorithm implements OptionHandler{
             }
             if(bestAttrIndex != -1){
 
-                System.out.println(bestAttrIndex +"\t"+attributeFrequency[bestAttrIndex]);
+//                System.out.println(bestAttrIndex +"\t"+attributeFrequency[bestAttrIndex]);
                 reduct.add(bestAttrIndex);
                 restIndices.remove(bestAttrIndex);
                 Object2IntMap<IntSet> tmp = new Object2IntOpenHashMap<>();
@@ -177,7 +184,7 @@ public class TEST extends FSAlgorithm implements OptionHandler{
                 }
             }else break;
         }
-        System.out.println(reduct.stream().map(x->""+x).collect(Collectors.joining(",")));
+//        System.out.println(reduct.stream().map(x->""+x).collect(Collectors.joining(",")));
         return reduct;
     }
 
@@ -215,4 +222,28 @@ public class TEST extends FSAlgorithm implements OptionHandler{
     }
 
 
+    @Override
+    public int numParams() {
+        return 1;
+    }
+
+    @Override
+    public void setParams(double... params) {
+        this.delta = params[0];
+    }
+
+    public static void main(String[] args) throws Exception {
+        File file = new File("./dataset/ionosphere.arff");
+        Instances data = new Instances(new FileReader((file)));
+        data.setClassIndex(data.numAttributes()-1);
+        TEST test = new TEST();
+        test.setOptions(Utils.splitOptions("-D 0.25"));
+        AttributeSelection as = new AttributeSelection(test);
+        MetaClassifier mc = new MetaClassifier();
+        mc.setAttributeSelection(as);
+        mc.setClassifier(new J48());
+        FSEvaluation evaluation = new FSEvaluation(data);
+        evaluation.crossValidateModel(mc,data,5,new Random(1));
+        System.out.println(evaluation.pctCorrect());
+    }
 }
