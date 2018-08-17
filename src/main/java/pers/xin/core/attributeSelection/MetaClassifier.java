@@ -242,24 +242,9 @@ public class MetaClassifier
     }
 
 
-    /**
-     * Output a representation of this classifier
-     *
-     * @return a representation of this classifier
-     */
+    @Override
     public String toString() {
-        if (m_AttributeSelection == null) {
-            return "MetaClassifier: No attribute selection possible.\n\n"
-                    +m_Classifier.toString();
-        }
-
-        StringBuffer result = new StringBuffer();
-        result.append("MetaClassifier:\n\n");
-        result.append(m_AttributeSelection.toResultsString());
-        result.append("\n\nHeader of reduced data:\n"+m_ReducedHeader.toString());
-        result.append("\n\nClassifier Model\n"+m_Classifier.toString());
-
-        return result.toString();
+        return "FSMetaClassifier: "+ getReductionString();
     }
 
     /**
@@ -343,4 +328,5 @@ public class MetaClassifier
     public static void main(String [] argv) {
         runClassifier(new MetaClassifier(), argv);
     }
+
 }

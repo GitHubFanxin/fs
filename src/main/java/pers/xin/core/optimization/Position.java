@@ -1,13 +1,13 @@
 package pers.xin.core.optimization;
 
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
  * Created by xin on 26/03/2018.
  */
-public class Position
-{
+public class Position implements Serializable {
     private double[] dimension;
 
     public Position(double... dimension) {

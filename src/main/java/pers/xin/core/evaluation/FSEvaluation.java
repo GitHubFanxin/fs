@@ -125,4 +125,21 @@ public class FSEvaluation extends Evaluation {
     public double timeMeasure(){
         return Arrays.stream(m_crossValidateTime).reduce(Double::sum).orElse(0)/m_crossValidateTime.length;
     }
+
+    public double AUC() {
+        double result = 0;
+        for (int i = 0; i < m_NumClasses; i++) {
+            result += areaUnderROC(i)*m_ClassPriors[i];
+        }
+        return result;
+    }
+
+    public double meamFMeasure(){
+        double result = 0;
+        for (int i = 0; i < m_NumClasses; i++) {
+            result += fMeasure(i);
+        }
+        result /= m_NumClasses;
+        return result;
+    }
 }

@@ -6,12 +6,13 @@ package pers.xin.core.optimization;
 public interface Function {
 
     /**
-     * default interval is [0,1] and default precision is 2.
+     * Param dimension of the function.
      */
     int dimension();
 
     /**
-     * 计算适应度
+     * Method can compute fitness. Pay attention to that search interval is [0,1]. You can multiply some coefficients
+     * to make the search interval become [0,1]
      * @param params
      * @return
      */

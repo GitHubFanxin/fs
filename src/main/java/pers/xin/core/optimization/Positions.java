@@ -19,6 +19,7 @@ public class Positions{
     }
 
     public Double mark(Position position, Double value){
+        position = new Position(position);
         if(map.containsKey(position)){//if current position has been visited
             int markTime = markTimes.get(position);
             double average = updateFunction(map.get(position),markTime,value);
@@ -27,11 +28,15 @@ public class Positions{
             history.get(position).add(value);
             if(position.equals(bestPosition)){//if current position is the best position update best position
                 Double max = Double.NEGATIVE_INFINITY;
+                Position tmp = bestPosition;
                 for (Map.Entry<Position, Double> positionDoubleEntry : map.entrySet()) {
                     if(positionDoubleEntry.getValue()>max){
-                        bestPosition = positionDoubleEntry.getKey();
+                        tmp = positionDoubleEntry.getKey();
                         max = positionDoubleEntry.getValue();
                     }
+                }
+                if(!bestPosition.equals(tmp)) {
+                    bestPosition = tmp;
                 }
             }else {
                 if(average > map.get(bestPosition)){//if current position fitness is bigger than best position
@@ -45,7 +50,7 @@ public class Positions{
             ArrayList<Double> h = new ArrayList<>();
             h.add(value);
             history.put(position,h);
-            if(value > map.get(bestPosition)){
+            if(value >= map.get(bestPosition)){ //avoid the bug of none gbest for next move
                 bestPosition = position;
             }
             return value;
@@ -57,7 +62,7 @@ public class Positions{
     }
 
     public Position getBestPosition() {
-        return bestPosition;
+        return new Position(bestPosition);
     }
 
     public Double getBestValue(){
@@ -75,12 +80,6 @@ public class Positions{
                 '}';
     }
 
-    private double updateFunction1(double a,int time, double b){
-        double x = a>b?a:b;
-        double y = a<b?a:b;
-        return 0.7*x+0.3*y;
-    }
-
     private double updateFunction(double a,int time, double b){
         return (a*time+b)/(time+1);
     }
@@ -88,17 +87,5 @@ public class Positions{
     public String getHistory(Object key){
         if(!history.containsKey(key)) return "no history";
         return history.get(key).stream().map(String::valueOf).collect(Collectors.joining(", "));
-    }
-
-    public Position finialBest(){
-        int max = 0;
-        Position best = Position.NONE;
-        for (Map.Entry<Position, Integer> positionIntegerEntry : markTimes.entrySet()) {
-            if(positionIntegerEntry.getValue()>max){
-                best = positionIntegerEntry.getKey();
-                max = positionIntegerEntry.getValue();
-            }
-        }
-        return best;
     }
 }

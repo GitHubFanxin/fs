@@ -5,20 +5,20 @@ import java.math.BigDecimal;
 import java.util.Random;
 
 /**
- * inspector in ISO
+ * inspector in PSO
  * Created by xin on 23/03/2018.
  */
-public class Inspector implements Serializable {
+public class Particle implements Serializable {
 
     /**
-     * Ramdom which decide movement of this inspector.
+     * Ramdom which decide movement of this particle.
      */
     private Random random;
 
     protected int dimension = 1;
 
     /**
-     * keep how many decimal
+     * number of decimal to keep
      */
     private int[] m_precision = new int[]{2};
 
@@ -43,12 +43,12 @@ public class Inspector implements Serializable {
     protected double[] velocity;
 
     /**
-     * best currentPosition for this inspector
+     * best currentPosition for this particle
      */
     protected Position pBestPosition;
 
     /**
-     * all inspectors must hold identical positions
+     * all particles must hold identical positions
      */
     private Positions positions;
 
@@ -63,7 +63,7 @@ public class Inspector implements Serializable {
      * @param dimension
      * @param precision
      */
-    public Inspector(double w, double c1, double c2, Random random, int dimension, int[] precision) {
+    public Particle(double w, double c1, double c2, Random random, int dimension, int[] precision) {
         this.random = random;
         this.dimension = dimension;
         this.w = w;
@@ -80,7 +80,7 @@ public class Inspector implements Serializable {
      * @param random
      * @param dimension
      */
-    public Inspector(double w, double c1, double c2, Random random, int dimension) {
+    public Particle(double w, double c1, double c2, Random random, int dimension) {
         this.random = random;
         this.dimension = dimension;
         this.w = w;
@@ -93,7 +93,7 @@ public class Inspector implements Serializable {
         this.random = random;
     }
 
-    public Inspector(Random random) {
+    public Particle(Random random) {
         this.random = random;
     }
 
@@ -122,7 +122,12 @@ public class Inspector implements Serializable {
         currentPosition = new Position(current);
         double fitness = function.computeFitness(currentPosition);
         positions.mark(currentPosition, fitness);
-        //double check
+        if(fitness==Double.NEGATIVE_INFINITY){
+            currentPosition = new Position(positions.getBestPosition());
+            fitness = function.computeFitness(currentPosition);
+            positions.mark(currentPosition, fitness);
+        }
+//        double check
 //        fitness = function.computeFitness(currentPosition);
 //        positions.mark(currentPosition,fitness);
         checkPBest();
@@ -163,7 +168,7 @@ public class Inspector implements Serializable {
 
     @Override
     public String toString() {
-        return "Inspector{" +
+        return "Particle{" +
                 "currentPosition=" + currentPosition +
                 ", pBestPosition=" + pBestPosition +
                 '}';

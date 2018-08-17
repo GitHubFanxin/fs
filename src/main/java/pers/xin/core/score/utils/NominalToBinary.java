@@ -38,11 +38,11 @@ import java.util.Vector;
  * approach). Binary attributes are left binary, if option '-A' is not given.If
  * the class is numeric, you might want to use the supervised version of this
  * filter.
- * <p/>
+ * <p>
  * <!-- globalinfo-end -->
  * 
  * <!-- options-start --> Valid options are:
- * <p/>
+ * </p>
  * 
  * <pre>
  * -N
@@ -216,10 +216,10 @@ public class NominalToBinary extends Filter implements UnsupervisedFilter,
 
   /**
    * Parses a given list of options.
-   * <p/>
+   * <p>
    * 
    * <!-- options-start --> Valid options are:
-   * <p/>
+   * </p>
    * 
    * <pre>
    * -N

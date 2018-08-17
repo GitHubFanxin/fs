@@ -23,4 +23,9 @@ public class WekaMetaClassifier extends AttributeSelectedClassifier implements F
         }
         return sb.toString();
     }
+
+    @Override
+    public String toString() {
+        return "WekaMetaClassifier: "+ getReductionString();
+    }
 }
