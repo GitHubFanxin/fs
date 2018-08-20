@@ -67,7 +67,7 @@ public class PSOWrapper extends FSAlgorithm implements Serializable{
             function.setFsAlgorithm(fsAlgorithm);
             PSO pso = new PSO(swarmSize,maxIterate,0.6,2,2,random,function);
             bestP = pso.search();
-            System.out.println(bestP);
+//            System.out.println(bestP);
         }
         ((OptimizableFS)fsAlgorithm).setParams(bestP.get());
         return fsAlgorithm.select(data);

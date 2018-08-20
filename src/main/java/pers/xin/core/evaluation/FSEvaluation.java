@@ -132,7 +132,7 @@ public class FSEvaluation extends Evaluation {
     public double AUC() {
         double result = 0;
         for (int i = 0; i < m_NumClasses; i++) {
-            result += areaUnderROC(i)*m_ClassPriors[i];
+            result += areaUnderROC(i)*m_ClassPriors[i]/m_ClassPriorsSum;
         }
         return result;
     }
@@ -141,6 +141,21 @@ public class FSEvaluation extends Evaluation {
         double result = 0;
         for (int i = 0; i < m_NumClasses; i++) {
             result += fMeasure(i);
+        }
+        result /= m_NumClasses;
+        return result;
+    }
+
+    public double gMean(int positive){
+        double sensitivity = recall(positive);
+        double specificity = trueNegativeRate(positive);
+        return Math.sqrt(sensitivity*specificity);
+    }
+
+    public double meanGMean(){
+        double result = 0;
+        for (int i = 0; i < m_NumClasses; i++) {
+            result += gMean(i);
         }
         result /= m_NumClasses;
         return result;
