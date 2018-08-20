@@ -8,6 +8,7 @@ import java.util.Arrays;
  * Created by xin on 26/03/2018.
  */
 public class Position implements Serializable {
+    private static final long serialVersionUID = 8177502680557477881L;
     private double[] dimension;
 
     public Position(double... dimension) {

@@ -8,6 +8,8 @@ import weka.classifiers.meta.AttributeSelectedClassifier;
  */
 public class WekaMetaClassifier extends AttributeSelectedClassifier implements FSMeasure{
 
+    private static final long serialVersionUID = -8534846033154059208L;
+
     @Override
     public String getReductionString() {
         StringBuffer sb = new StringBuffer();

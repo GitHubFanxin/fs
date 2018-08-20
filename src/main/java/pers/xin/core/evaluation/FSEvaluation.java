@@ -16,6 +16,9 @@ import java.util.Random;
  * Created by xin on 10/06/2018.
  */
 public class FSEvaluation extends Evaluation {
+
+    private static final long serialVersionUID = -3113877838085603131L;
+
     String[] m_crossValidateReductions;
 
     String m_reduction;

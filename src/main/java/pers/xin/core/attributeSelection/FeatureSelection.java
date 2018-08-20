@@ -14,6 +14,8 @@ import java.util.List;
 public class FeatureSelection extends Filter implements SupervisedFilter,
     OptionHandler, WeightedInstancesHandler {
 
+    private static final long serialVersionUID = -6786593364318491299L;
+
     private FSAlgorithm m_FSAlgorithm;
 
     /** holds the selected attributes */

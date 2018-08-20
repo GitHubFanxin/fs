@@ -11,6 +11,8 @@ import java.util.Random;
  */
 public class RepeatableMetaClassifier extends MetaClassifier {
 
+    private static final long serialVersionUID = -6743798769255251712L;
+
     /**
      * Build the classifier on the dimensionally reduced data.
      *

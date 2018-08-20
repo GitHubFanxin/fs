@@ -1,5 +1,6 @@
 package pers.xin.core.optimization;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +9,8 @@ import java.util.stream.Collectors;
 /**
  * Created by xin on 30/03/2018.
  */
-public class Positions{
+public class Positions implements Serializable{
+    private static final long serialVersionUID = 1074191679350134852L;
     private HashMap<Position,Double> map = new HashMap<>();
     private HashMap<Position,Integer> markTimes = new HashMap<>();
     private Position bestPosition = Position.NONE;

@@ -14,6 +14,7 @@ import java.util.Random;
  * Created by xin on 2018/8/4.
  */
 public abstract class AbstractFSFunction implements Function,Serializable {
+    private static final long serialVersionUID = 8979912080224342864L;
     protected FSAlgorithm fsAlgorithm;
     protected Classifier classifier;
     protected Instances data;

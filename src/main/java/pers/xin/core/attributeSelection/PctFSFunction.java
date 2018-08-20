@@ -21,6 +21,8 @@ import java.util.Random;
 public class PctFSFunction extends AbstractFSFunction implements Serializable{
 
 
+    private static final long serialVersionUID = 8366964569106450942L;
+
     @Override
     protected double measure(double[] params) throws Exception {
         data.randomize(random);

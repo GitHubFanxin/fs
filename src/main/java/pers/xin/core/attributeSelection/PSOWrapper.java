@@ -19,6 +19,8 @@ import java.util.Random;
  * Created by xin on 03/08/2018.
  */
 public class PSOWrapper extends FSAlgorithm implements Serializable{
+    private static final long serialVersionUID = 1976134678795860595L;
+
     protected FSAlgorithm fsAlgorithm;
 
     protected Classifier classifier;
