@@ -233,5 +233,28 @@ public class NeighborhoodEntropy implements Entropy{
         return jointEntropy(r,s);
     }
 
+    @Override
+    public double SymmetricalUncertainty(Set<Integer> a, Set<Integer> b) {
+        double mi = mutualInformation(a,b);
+        if(mi<=0) return 0;
+        double ha = entropy(a);
+        double hb = entropy(b);
+        return 2*mi/(ha*hb);
+    }
 
+    @Override
+    public double SymmetricalUncertainty(Set<Integer> a, int b) {
+        Set<Integer> B = new HashSet<>();
+        B.add(b);
+        return 0;
+    }
+
+    @Override
+    public double SymmetricalUncertainty(int a, int b) {
+        double mi = mutualInformation(a,b);
+        if(mi<=0) return 0;
+        double ha = entropy(a);
+        double hb = entropy(b);
+        return 2*mi/(ha*hb);
+    }
 }

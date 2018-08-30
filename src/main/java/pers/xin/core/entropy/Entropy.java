@@ -13,4 +13,10 @@ public interface Entropy {
     double mutualInformation(Set<Integer> indicesR, int indexS);
 
     double entropy(Set<Integer> s);
+
+    double SymmetricalUncertainty(Set<Integer> a, Set<Integer> b);
+
+    double SymmetricalUncertainty(Set<Integer> a, int b);
+
+    double SymmetricalUncertainty(int a, int b);
 }

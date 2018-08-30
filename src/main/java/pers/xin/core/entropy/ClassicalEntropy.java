@@ -5,6 +5,8 @@ import pers.xin.core.neighbor.Neighborhood2NORM;
 import weka.core.ContingencyTables;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.filters.Filter;
+import weka.filters.supervised.attribute.Discretize;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,8 +26,14 @@ public class ClassicalEntropy implements Entropy{
 
     double[] entropy_cache;
 
-    public ClassicalEntropy(Instances m_data) {
-        this.m_data = m_data;
+    public ClassicalEntropy(Instances data) {
+        try {
+            Discretize discretize = new Discretize();
+            discretize.setInputFormat(data);
+            m_data = Filter.useFilter(data,discretize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         MI_cache = new double[m_data.numAttributes()][m_data.numAttributes()];
         entropy_cache = new double[m_data.numAttributes()];
         for (int i = 0; i < m_data.numAttributes(); i++) {
@@ -113,5 +121,30 @@ public class ClassicalEntropy implements Entropy{
         Set<Integer> i = new HashSet<>();
         i.add(index);
         return entropy(i);
+    }
+
+    @Override
+    public double SymmetricalUncertainty(Set<Integer> a, Set<Integer> b) {
+        double mi = mutualInformation(a,b);
+        if(mi<=0) return 0;
+        double ha = entropy(a);
+        double hb = entropy(b);
+        return 2*mi/(ha*hb);
+    }
+
+    @Override
+    public double SymmetricalUncertainty(Set<Integer> a, int b) {
+        Set<Integer> B = new HashSet<>();
+        B.add(b);
+        return 0;
+    }
+
+    @Override
+    public double SymmetricalUncertainty(int a, int b) {
+        double mi = mutualInformation(a,b);
+        if(mi<=0) return 0;
+        double ha = entropy(a);
+        double hb = entropy(b);
+        return 2*mi/(ha*hb);
     }
 }
